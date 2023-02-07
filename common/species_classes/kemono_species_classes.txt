@@ -1,0 +1,14 @@
+kemono_species = {
+    archetype = BIOLOGICAL
+
+    possible = { authority = { NOT = { value = auth_machine_intelligence text = SPECIES_CLASS_MUST_NOT_USE_MACHINE_INTELLIGENCE } } }
+
+    portraits = {
+        "kemono_portrait"
+    }
+	
+    gender = no
+
+    graphical_culture = kemono_01
+    move_pop_sound_effect = "moving_pop_confirmation"
+}

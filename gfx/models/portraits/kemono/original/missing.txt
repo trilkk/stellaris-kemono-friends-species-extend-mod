@@ -1,0 +1,21 @@
+Proper image missing from kemono library:
+- Crunchyroll-Hime (ep08)
+
+Friends not included because the design is somehow off:
+- Atlantic Puffin (ep08)
+- Aurochs (ep05)
+- Bergman's Bear (ep08)
+- Campo Flicker (ep10)
+- Ezo Brown Bear (ep08)
+- Frilled Lizard (ep02)
+- Giant Armadillo (ep06)
+- Giant Panda (ep08)
+- Kodiak Bear (ep08)
+- Maltese Tiger (ep08)
+- White Rhinoceros (ep06)
+
+Friends included even if they weren't in the anime because they're cool:
+- Black-Tailed Gull (pavilion)
+- Common Gull (pavilion)
+- Masked Booby (fan comic 13+i)
+- Tufted Puffin (guidebook 6)

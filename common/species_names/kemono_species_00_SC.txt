@@ -1,0 +1,8 @@
+kemono_species = {
+    kemono_species = {
+        name = "兽娘"
+        plural = "兽娘"
+        home_system = "加帕里"
+        home_planet = "公园"
+    }
+}
