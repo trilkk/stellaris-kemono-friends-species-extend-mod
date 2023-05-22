@@ -4,5 +4,6 @@ kemono_species = {
         plural = "Friends"
         home_system = "Japari"
         home_planet = "Park"
+        name_list =  "MAM1"
     }
 }

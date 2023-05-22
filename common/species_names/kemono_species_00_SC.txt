@@ -4,5 +4,6 @@ kemono_species = {
         plural = "兽娘"
         home_system = "加帕里"
         home_planet = "公园"
+        name_list =  "MAM1"
     }
 }
