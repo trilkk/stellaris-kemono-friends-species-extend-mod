@@ -148,7 +148,7 @@ portrait_groups = {
         }
 
         #species scope
-        species = { #generic portrait for a1species
+        species = {
             add = {
                 portraits = {
                     friend_aardwolf
