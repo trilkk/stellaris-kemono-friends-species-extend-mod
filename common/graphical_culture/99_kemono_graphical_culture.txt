@@ -1,4 +1,3 @@
 kemono_01 = {
-	has_city_graphics = no
-	fallback = mammalian_01
+    fallback = mammalian_01
 }

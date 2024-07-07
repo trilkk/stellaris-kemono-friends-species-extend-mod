@@ -1,0 +1,8 @@
+mammalians = { #Portrait name for simplicity
+	name = MAM #Species Class Name here ( For No Loc changes needed)
+
+	sets = {
+            kemono #Portrait name for simplicity
+	}
+}
+

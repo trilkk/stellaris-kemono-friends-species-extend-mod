@@ -1,0 +1,5 @@
+room_selector = {
+    game_setup = {
+        "japari_park_room" = { always = yes }
+    }
+}
