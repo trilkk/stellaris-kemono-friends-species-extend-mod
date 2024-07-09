@@ -1,3 +1,0 @@
-kemono_01 = {
-    fallback = mammalian_01
-}

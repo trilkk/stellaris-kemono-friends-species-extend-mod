@@ -19,5 +19,4 @@ KEMONO1 = {
     gender = no
     graphical_culture = kemono_01
     move_pop_sound_effect = "mammalian_pops_move"
-    resources = {}
 }

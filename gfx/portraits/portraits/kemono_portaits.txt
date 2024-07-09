@@ -71,7 +71,7 @@ portraits = {
 
 portrait_groups = {
     kemono = {
-        default = friend_crested_ibis
+        default = friend_reticulated_giraffe
         game_setup = {
             add = {
                 portraits = {

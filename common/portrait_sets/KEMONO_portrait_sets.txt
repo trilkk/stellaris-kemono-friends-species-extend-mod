@@ -11,7 +11,7 @@
 #													(the number of uplifted portraits must be the same as the number of portraits in 'portraits' list).
 
 kemono = { #use portrait name here too
-	species_class = KEMONO1 #Vanilla Species Class here
+	species_class = MAM #Vanilla Species Class here
 
 	portraits = {
 		"kemono"

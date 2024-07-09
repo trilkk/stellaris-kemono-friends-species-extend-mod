@@ -1,4 +1,4 @@
-kemono_species = {
+KEMONO1 = {
     kemono_species = {
         name = "兽娘"
         plural = "兽娘"

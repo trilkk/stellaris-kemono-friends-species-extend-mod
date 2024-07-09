@@ -1,5 +1,5 @@
-kemono_species = {
-    kemono_species = {
+KEMONO1 = {
+    kemono = {
         name = "Kemono Friend"
         plural = "Friends"
         home_system = "Japari"
