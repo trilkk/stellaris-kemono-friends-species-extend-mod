@@ -122,6 +122,16 @@
             "offset": 0.08
         },
         {
+            "name": "fennec",
+            "scale": 1.17,
+            "offset": 0.08
+        },
+        {
+            "name": "fossa",
+            "scale": 1.22,
+            "offset": 0.08
+        },
+        {
             "name": "thomsons_gazelle",
             "scale": 1.25,
             "offset": 0.05
