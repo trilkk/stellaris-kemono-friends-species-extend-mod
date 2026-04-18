@@ -132,6 +132,31 @@
             "offset": 0.08
         },
         {
+            "name": "gannan_yak",
+            "scale": 1.09,
+            "offset": 0.08
+        },
+        {
+            "name": "gentoo_penguin",
+            "scale": 1.23,
+            "offset": 0.08
+        },
+        {
+            "name": "gray_wolf",
+            "scale": 1.26,
+            "offset": 0.08
+        },
+        {
+            "name": "great_auk",
+            "scale": 1.31,
+            "offset": 0.08
+        },
+        {
+            "name": "great_white_pelican",
+            "scale": 1.21,
+            "offset": 0.08
+        },
+        {
             "name": "thomsons_gazelle",
             "scale": 1.25,
             "offset": 0.05
