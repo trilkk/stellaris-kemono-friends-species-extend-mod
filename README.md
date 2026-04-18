@@ -9,6 +9,6 @@ Also includes a flag and a room background of Japari Park.
 
 Original <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=899506406">Stellaris Kemono Friends Species Extend Mod</a> by Steam user *licy18*.
 
-**Note:** Steam Workshop bug prevents uploading a new version of the mod unless `thumbnail.png` is temporarily deleted.
-
 **TODO:** Unclear if the species class works and the portrait set spawns correctly as an AI empire.
+
+**TODO:** City sets has an extra entry for an unexplicable reason.

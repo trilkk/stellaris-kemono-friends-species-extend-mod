@@ -1,0 +1,93 @@
+{
+    "dst_directory": "gfx/models/portraits/kemono",
+    "src_directory": "gfx/models/portraits/kemono/original",
+    "target_height": 380,
+    "portraits":
+    [
+        {
+            "name": "aardwolf",
+            "scale": 1.19,
+            "offset": 0.08
+        },
+        {
+            "name": "adelie_penguin",
+            "scale": 1.2,
+            "offset": 0.08
+        },
+        {
+            "name": "arabian_oryx",
+            "scale": 1.306,
+            "offset": 0.05
+        },
+        {
+            "name": "arctic_fox",
+            "scale": 1.22,
+            "offset": 0.08
+        },
+        {
+            "name": "axolotl",
+            "scale": 1.19,
+            "offset": 0.08
+        },
+        {
+            "name": "baikal_seal",
+            "scale": 1.23,
+            "offset": 0.08
+        },
+        {
+            "name": "binturong",
+            "scale": 1.18,
+            "offset": 0.08
+        },
+        {
+            "name": "black_headed_ibis",
+            "scale": 1.18,
+            "offset": 0.08
+        },
+        {
+            "name": "black_jaguar",
+            "scale": 1.17,
+            "offset": 0.08
+        },
+        {
+            "name": "black_leopard",
+            "scale": 1.21,
+            "offset": 0.08
+        },
+        {
+            "name": "black_swan",
+            "scale": 1.18,
+            "offset": 0.05
+        },
+        {
+            "name": "black_tailed_gull",
+            "scale": 1.2205,
+            "offset": 0.08
+        },
+        {
+            "name": "california_sea_lion",
+            "scale": 1.2,
+            "offset": 0.08
+        },
+        {
+            "name": "common_gull",
+            "scale": 1.2105,
+            "offset": 0.08
+        },
+        {
+            "name": "crested_ibis",
+            "scale": 1.23,
+            "offset": 0.08
+        },
+        {
+            "name": "crested_porcupine",
+            "scale": 1.24,
+            "offset": 0.08
+        },
+        {
+            "name": "thomsons_gazelle",
+            "scale": 1.25,
+            "offset": 0.05
+        }
+    ]
+}
