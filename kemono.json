@@ -1,6 +1,8 @@
 {
     "dst_directory": "gfx/models/portraits/kemono",
     "src_directory": "gfx/models/portraits/kemono/original",
+    "translucency_threshold_incoming": 44,
+    "translucency_threshold_outgoing": 1,
     "target_height": 380,
     "portraits":
     [
@@ -92,6 +94,31 @@
         {
             "name": "donkey",
             "scale": 1.17,
+            "offset": 0.08
+        },
+        {
+            "name": "emu",
+            "scale": 1.2,
+            "offset": 0.08
+        },
+        {
+            "name": "eurasian_eagle_owl",
+            "scale": 1.1105,
+            "offset": 0.08
+        },
+        {
+            "name": "eurasian_lynx",
+            "scale": 1.13,
+            "offset": 0.08
+        },
+        {
+            "name": "european_hare",
+            "scale": 1.18,
+            "offset": 0.05
+        },
+        {
+            "name": "ezo_red_fox",
+            "scale": 1.2,
             "offset": 0.08
         },
         {

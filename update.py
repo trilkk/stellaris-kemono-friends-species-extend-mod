@@ -12,7 +12,6 @@ import sys
 ########################################
 
 g_kemono_database = 'kemono.json'
-g_translucency_threshold = 6
 
 ########################################
 # Functions ############################
@@ -59,13 +58,7 @@ def image_create_empty_rgba(sx, sy):
     """Creates a new fully transparent image."""
     return PIL.Image.new(mode='RGBA', size=(sx, sy), color=(0, 0, 0, 0))
 
-def image_paste_center(dst, src):
-    """Pastes source image to the center of destination image."""
-    tx = round(float(dst.width - src.width) / 2.0)
-    ty = round(float(dst.height - src.height) / 2.0)
-    dst.paste(src, (tx, ty))
-
-def image_transparent_to_transparent_black(img):
+def image_cut_transparency(img, cut_level):
     """Converts all fully transparent pixels in image to transparent black."""
     if img.mode != "RGBA":
         raise RuntimeError("invalid image mode: '%s'" % (img.mode))
@@ -75,20 +68,21 @@ def image_transparent_to_transparent_black(img):
         for jj in range(img.height):
             pixel = img.getpixel((ii, jj))
             # Simple case.
-            if pixel[3] <= g_translucency_threshold:
+            if pixel[3] <= cut_level:
                 pixels[ii, jj] = (0, 0, 0, 0)
                 ret = True
     return ret
+
+def image_paste_center(dst, src):
+    """Pastes source image to the center of destination image."""
+    tx = round(float(dst.width - src.width) / 2.0)
+    ty = round(float(dst.height - src.height) / 2.0)
+    dst.paste(src, (tx, ty))
 
 def image_crop_content(img, border_lr = None, border_ud = None):
     """Crop image to the actual content, add border if missing."""
     if (border_lr is None) and (border_ud is None):
         return img
-    # Erase essentially translucent areas completely before calculating bounding box.
-    image_transparent_to_transparent_black(img)
-    for ii in img.get_flattened_data():
-        if (ii[3] == 0) and ((ii[0] + ii[1] + ii[2]) > 0):
-            raise RuntimeError("lol: %s" % (str(ii)))
     bbox = img.getbbox()
     if not bbox:
         raise RuntimeError("image_crop_content(): no content")
@@ -120,27 +114,29 @@ class Portrait:
         self.__scale = scale
         self.__offset = offset
 
-    def generateImage(self, infile, outfile, target_height):
+    def generateImage(self, infile, outfile, trns_incoming, trns_outgoing, target_height):
         """Generates image."""
-        img = PIL.Image.open(infile)
-        img = image_crop_content(img, 4, 4)
-        factor = float(target_height) * self.__scale / float(img.size[1])
-        tx = int(factor * img.size[0])
-        ty = int(factor * img.size[1])
-        scaled_img = img.resize((tx, ty), PIL.Image.Resampling.LANCZOS)
-        dst_image = image_create_empty_rgba(tx, target_height)
-        dy = int(self.__offset * float(target_height))
-        dst_image.paste(scaled_img, (0, dy))
-        dst_image = image_crop_content(dst_image, 2)
+        src_img = PIL.Image.open(infile)
+        image_cut_transparency(src_img, trns_incoming)
+        src_img = image_crop_content(src_img, 4, 4)
+        factor = float(target_height) * self.__scale / float(src_img.size[1])
+        tx = round(factor * float(src_img.size[0]))
+        ty = round(factor * float(src_img.size[1]))
+        scaled_img = src_img.resize((tx, ty), PIL.Image.Resampling.LANCZOS)
+        dst_img = image_create_empty_rgba(tx, target_height)
+        dy = round(self.__offset * float(target_height))
+        dst_img.paste(scaled_img, (0, dy))
+        image_cut_transparency(dst_img, trns_outgoing)
+        dst_img = image_crop_content(dst_img, 2)
         try:
             cmp_image = PIL.Image.open(outfile)
-            if images_equal(dst_image, cmp_image):
+            if images_equal(dst_img, cmp_image):
                 print("Image: '%s' (%ix%i) not changed" % (outfile, tx, target_height))
             else:
-                dst_image.save(outfile)
+                dst_img.save(outfile)
                 print("Image: '%s' (%ix%i) updated" % (outfile, tx, target_height))
         except FileNotFoundError:
-            dst_image.save(outfile)
+            dst_img.save(outfile)
             print("Image: '%s' (%ix%i) created" % (outfile, tx, target_height))
 
     def getName(self):
@@ -164,7 +160,7 @@ class PortraitDB:
             fileName = ii.getName() + ".png"
             dstFile = os.path.join(self.__dst_directory, ii.getName() + ".png")
             srcFile = os.path.join(self.__src_directory, fileName)
-            ii.generateImage(srcFile, dstFile, self.__target_height)
+            ii.generateImage(srcFile, dstFile, self.__trns_incoming, self.__trns_outgoing, self.__target_height)
 
     def readFromJson(self, op):
         """Reads data from json."""
@@ -175,6 +171,8 @@ class PortraitDB:
         fd.close()
         self.__dst_directory = data['dst_directory']
         self.__src_directory = data['src_directory']
+        self.__trns_incoming = int(data['translucency_threshold_incoming'])
+        self.__trns_outgoing = int(data['translucency_threshold_outgoing'])
         self.__target_height = int(data['target_height'])
         self.__portraits = []
         for ii in data['portraits']:
