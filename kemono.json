@@ -85,6 +85,16 @@
             "offset": 0.08
         },
         {
+            "name": "domestic_dog_mixed_breed",
+            "scale": 1.19,
+            "offset": 0.08
+        },
+        {
+            "name": "donkey",
+            "scale": 1.17,
+            "offset": 0.08
+        },
+        {
             "name": "thomsons_gazelle",
             "scale": 1.25,
             "offset": 0.05
