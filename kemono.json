@@ -187,6 +187,46 @@
             "offset": 0.08
         },
         {
+            "name": "jaguar",
+            "scale": 1.14,
+            "offset": 0.08
+        },
+        {
+            "name": "jaguarundi",
+            "scale": 1.14,
+            "offset": 0.08
+        },
+        {
+            "name": "japanese_badger",
+            "scale": 1.15,
+            "offset": 0.08
+        },
+        {
+            "name": "japanese_giant_salamander",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
+            "name": "japanese_river_otter",
+            "scale": 1.18,
+            "offset": 0.08
+        },
+        {
+            "name": "jungle_cat",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
+            "name": "king_cheetah",
+            "scale": 1.14,
+            "offset": 0.08
+        },
+        {
+            "name": "kordofan_giraffe",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
             "name": "thomsons_gazelle",
             "scale": 1.25,
             "offset": 0.05
