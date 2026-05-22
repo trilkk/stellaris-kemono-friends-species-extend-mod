@@ -227,6 +227,21 @@
             "offset": 0.08
         },
         {
+            "name": "least_weasel",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
+            "name": "leopard",
+            "scale": 1.15,
+            "offset": 0.08
+        },
+        {
+            "name": "long-tailed_tit",
+            "scale": 1.14,
+            "offset": 0.08
+        },
+        {
             "name": "thomsons_gazelle",
             "scale": 1.25,
             "offset": 0.05
