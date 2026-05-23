@@ -203,7 +203,7 @@
         },
         {
             "name": "japanese_giant_salamander",
-            "scale": 1.16,
+            "scale": 1.18,
             "offset": 0.08
         },
         {
@@ -223,7 +223,7 @@
         },
         {
             "name": "kordofan_giraffe",
-            "scale": 1.16,
+            "scale": 1.17,
             "offset": 0.08
         },
         {
@@ -237,9 +237,79 @@
             "offset": 0.08
         },
         {
-            "name": "long-tailed_tit",
+            "name": "long_tailed_tit",
             "scale": 1.14,
             "offset": 0.08
+        },
+        {
+            "name": "malayan_tapir",
+            "scale": 1.13,
+            "offset": 0.08
+        },
+        {
+            "name": "maned_wolf",
+            "scale": 1.22,
+            "offset": 0.08
+        },
+        {
+            "name": "marbled_cat",
+            "scale": 1.12,
+            "offset": 0.08
+        },
+        {
+            "name": "margay",
+            "scale": 1.13,
+            "offset": 0.08
+        },
+        {
+            "name": "markhor",
+            "scale": 1.11,
+            "offset": 0.06
+        },
+        {
+            "name": "masai_giraffe",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
+            "name": "masked_booby",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
+            "name": "meerkat",
+            "scale": 1.19,
+            "offset": 0.08
+        },
+        {
+            "name": "northern_dwarf_siren",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
+            "name": "northern_white_faced_owl",
+            "scale": 1.12,
+            "offset": 0.08
+        },
+        {
+            "name": "ocelot",
+            "scale": 1.14,
+            "offset": 0.08
+        },
+        {
+            "name": "okapi",
+            "scale": 1.16,
+            "offset": 0.08
+        },
+        {
+            "name": "okinawa_rail",
+            "scale": 1.18,
+            "offset": 0.08
+        },
+        {
+            "name": "oriental_stork",
+            "scale": 1.17,
+            "offset": 0.06
         },
         {
             "name": "thomsons_gazelle",
