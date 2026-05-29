@@ -108,11 +108,12 @@ def image_crop_content(img, border_lr = None, border_ud = None):
 class Portrait:
     """Class abstracting a species portrait."""
 
-    def __init__(self, name, scale = None, offset = None):
+    def __init__(self, name, scale = None, offset = None, flip = False):
         """Constructor."""
         self.__name = name
         self.__scale = scale
         self.__offset = offset
+        self.__flip = flip
 
     def generateImage(self, infile, outfile, trns_incoming, trns_outgoing, target_height):
         """Generates image."""
@@ -123,9 +124,10 @@ class Portrait:
         tx = round(factor * float(src_img.size[0]))
         ty = round(factor * float(src_img.size[1]))
         scaled_img = src_img.resize((tx, ty), PIL.Image.Resampling.LANCZOS)
+        transposed_img = scaled_img.transpose(PIL.Image.Transpose.FLIP_LEFT_RIGHT) if self.__flip else scaled_img
         dst_img = image_create_empty_rgba(tx, target_height)
         dy = round(self.__offset * float(target_height))
-        dst_img.paste(scaled_img, (0, dy))
+        dst_img.paste(transposed_img, (0, dy))
         image_cut_transparency(dst_img, trns_outgoing)
         dst_img = image_crop_content(dst_img, 2)
         try:
@@ -175,14 +177,16 @@ class PortraitDB:
         self.__trns_outgoing = int(data['translucency_threshold_outgoing'])
         self.__target_height = int(data['target_height'])
         self.__portraits = []
+        default_offset = float(data['default_offset'])
         for ii in data['portraits']:
             name = ii['name']
             for jj in self.__portraits:
                 if jj.getName() == name:
                     raise RuntimeError("readFromJson(): multiple instances of portrait '%s'" % (name))
             scale = float(ii['scale'])
-            offset = float(ii['offset'])
-            self.__portraits += [Portrait(name, scale, offset)]
+            offset = default_offset + float(ii['offset']) if 'offset' in ii.keys() else default_offset
+            flip = bool(ii['flip']) if 'flip' in ii.keys() else False
+            self.__portraits += [Portrait(name, scale, offset, flip)]
 
     def verify(self):
         """Verifies data against existing files."""

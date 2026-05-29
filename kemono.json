@@ -3,318 +3,310 @@
     "src_directory": "gfx/models/portraits/kemono/original",
     "translucency_threshold_incoming": 44,
     "translucency_threshold_outgoing": 1,
+    "default_offset": 0.08,
     "target_height": 380,
     "portraits":
     [
         {
             "name": "aardwolf",
             "scale": 1.19,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "adelie_penguin",
             "scale": 1.2,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "arabian_oryx",
             "scale": 1.306,
-            "offset": 0.05
+            "offset": -0.03
         },
         {
             "name": "arctic_fox",
-            "scale": 1.22,
-            "offset": 0.08
+            "scale": 1.22
         },
         {
             "name": "axolotl",
             "scale": 1.19,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "baikal_seal",
-            "scale": 1.23,
-            "offset": 0.08
+            "scale": 1.23
         },
         {
             "name": "binturong",
-            "scale": 1.18,
-            "offset": 0.08
+            "scale": 1.18
         },
         {
             "name": "black_headed_ibis",
             "scale": 1.18,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "black_jaguar",
-            "scale": 1.17,
-            "offset": 0.08
+            "scale": 1.17
         },
         {
             "name": "black_leopard",
-            "scale": 1.21,
-            "offset": 0.08
+            "scale": 1.21
         },
         {
             "name": "black_swan",
             "scale": 1.18,
-            "offset": 0.05
+            "offset": -0.03
         },
         {
             "name": "black_tailed_gull",
-            "scale": 1.2205,
-            "offset": 0.08
+            "scale": 1.2205
         },
         {
             "name": "california_sea_lion",
             "scale": 1.2,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "common_gull",
             "scale": 1.2105,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "crested_ibis",
-            "scale": 1.23,
-            "offset": 0.08
+            "scale": 1.23
         },
         {
             "name": "crested_porcupine",
             "scale": 1.24,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "domestic_dog_mixed_breed",
-            "scale": 1.19,
-            "offset": 0.08
+            "scale": 1.19
         },
         {
             "name": "donkey",
             "scale": 1.17,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "emu",
             "scale": 1.2,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "eurasian_eagle_owl",
-            "scale": 1.1105,
-            "offset": 0.08
+            "scale": 1.1105
         },
         {
             "name": "eurasian_lynx",
-            "scale": 1.13,
-            "offset": 0.08
+            "scale": 1.13
         },
         {
             "name": "european_hare",
             "scale": 1.18,
-            "offset": 0.05
+            "offset": -0.03
         },
         {
             "name": "ezo_red_fox",
             "scale": 1.2,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "fennec",
             "scale": 1.17,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "fossa",
             "scale": 1.22,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "gannan_yak",
             "scale": 1.09,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "gentoo_penguin",
             "scale": 1.23,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "gray_wolf",
-            "scale": 1.26,
-            "offset": 0.08
+            "scale": 1.26
         },
         {
             "name": "great_white_pelican",
             "scale": 1.21,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "hellbender",
-            "scale": 1.16,
-            "offset": 0.08
+            "scale": 1.16
         },
         {
             "name": "hippopotamus",
-            "scale": 1.15,
-            "offset": 0.08
+            "scale": 1.15
         },
         {
             "name": "humboldt_penguin",
             "scale": 1.19,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "hyracotherium",
-            "scale": 1.09,
-            "offset": 0.08
+            "scale": 1.09
         },
         {
             "name": "iriomote_cat",
             "scale": 1.11,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "island_fox",
             "scale": 1.15,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "italian_wolf",
             "scale": 1.14,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "jaguar",
             "scale": 1.14,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "jaguarundi",
             "scale": 1.14,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "japanese_badger",
-            "scale": 1.15,
-            "offset": 0.08
+            "scale": 1.15
         },
         {
             "name": "japanese_giant_salamander",
-            "scale": 1.18,
-            "offset": 0.08
+            "scale": 1.18
         },
         {
             "name": "japanese_river_otter",
             "scale": 1.18,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "jungle_cat",
-            "scale": 1.16,
-            "offset": 0.08
+            "scale": 1.16
         },
         {
             "name": "king_cheetah",
             "scale": 1.14,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "kordofan_giraffe",
-            "scale": 1.17,
-            "offset": 0.08
+            "scale": 1.17
         },
         {
             "name": "least_weasel",
             "scale": 1.16,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "leopard",
             "scale": 1.15,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "long_tailed_tit",
-            "scale": 1.14,
-            "offset": 0.08
+            "scale": 1.14
         },
         {
             "name": "malayan_tapir",
-            "scale": 1.13,
-            "offset": 0.08
+            "scale": 1.13
         },
         {
             "name": "maned_wolf",
-            "scale": 1.22,
-            "offset": 0.08
+            "scale": 1.22
         },
         {
             "name": "marbled_cat",
-            "scale": 1.12,
-            "offset": 0.08
+            "scale": 1.12
         },
         {
             "name": "margay",
             "scale": 1.13,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "markhor",
             "scale": 1.11,
-            "offset": 0.06
+            "offset": -0.02
         },
         {
             "name": "masai_giraffe",
             "scale": 1.16,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "masked_booby",
             "scale": 1.16,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "meerkat",
             "scale": 1.19,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "northern_dwarf_siren",
             "scale": 1.16,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "northern_white_faced_owl",
             "scale": 1.12,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "ocelot",
-            "scale": 1.14,
-            "offset": 0.08
+            "scale": 1.14
         },
         {
             "name": "okapi",
-            "scale": 1.16,
-            "offset": 0.08
+            "scale": 1.16
         },
         {
             "name": "okinawa_rail",
             "scale": 1.18,
-            "offset": 0.08
+            "flip": true
         },
         {
             "name": "oriental_stork",
             "scale": 1.17,
-            "offset": 0.06
+            "offset": -0.02,
+            "flip": true
+        },
+        {
+            "name": "pale_fox",
+            "scale": 1.16
+        },
+        {
+            "name": "plains_zebra",
+            "scale": 1.15,
+            "offset": -0.02
+        },
+        {
+            "name": "quagga",
+            "scale": 1.16,
+            "flip": true
         },
         {
             "name": "thomsons_gazelle",
             "scale": 1.25,
-            "offset": 0.05
+            "offset": -0.03
         }
     ]
 }
