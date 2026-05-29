@@ -62,6 +62,10 @@
             "scale": 1.2205
         },
         {
+            "name": "bush_hyrax",
+            "scale": 1.14
+        },
+        {
             "name": "california_sea_lion",
             "scale": 1.2,
             "flip": true
@@ -302,6 +306,48 @@
             "name": "quagga",
             "scale": 1.16,
             "flip": true
+        },
+        {
+            "name": "raccoon",
+            "scale": 1.105
+        },
+        {
+            "name": "red_crowned_crane",
+            "scale": 1.12,
+            "offset": -0.03
+        },
+        {
+            "name": "red_fox",
+            "scale": 1.15
+        },
+        {
+            "name": "red_panda",
+            "scale": 1.15
+        },
+        {
+            "name": "reticulated_giraffe",
+            "scale": 1.14,
+            "flip": true
+        },
+        {
+            "name": "rock_ptarmigan",
+            "scale": 1.16,
+            "flip": true
+        },
+        {
+            "name": "rothschilds_giraffe",
+            "scale": 1.15
+        },
+        {
+            "name": "royal_penguin",
+            "scale": 1.16,
+            "offset": -0.02,
+            "flip": true
+        },
+        {
+            "name": "ruppells_fox",
+            "scale": 1.15,
+            "offset": -0.02
         },
         {
             "name": "thomsons_gazelle",
