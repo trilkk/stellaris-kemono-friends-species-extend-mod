@@ -156,9 +156,11 @@ class PortraitDB:
         """Constructor."""
         self.readFromJson(g_kemono_database)
 
-    def generateImages(self):
+    def generateImages(self, portraits = []):
         """Updates all images."""
         for ii in self.__portraits:
+            if portraits and (not (ii.getName() in portraits)):
+                continue
             fileName = ii.getName() + ".png"
             dstFile = os.path.join(self.__dst_directory, ii.getName() + ".png")
             srcFile = os.path.join(self.__src_directory, fileName)
@@ -200,8 +202,9 @@ if __name__ == '__main__':
     program_name = os.path.basename(sys.argv[0])
 
     parser = argparse.ArgumentParser(usage="%s [options]" % (program_name), add_help=False, formatter_class=argparse.RawDescriptionHelpFormatter, description="""Script for regenerating mod images.""")
-    parser.add_argument("-h", "--help", action="store_true", help="Print this help message and exit")
-    parser.add_argument("--verify", action="store_true", help="Verify portraits and the database match")
+    parser.add_argument('-h', '--help', action='store_true', help='Print this help message and exit')
+    parser.add_argument('--verify', action='store_true', help='Verify portraits and the database match')
+    parser.add_argument('portraits', nargs='*', help='Specify the portraits to generate')
 
     args = parser.parse_args()
 
@@ -220,6 +223,6 @@ if __name__ == '__main__':
         os.chdir(script_path)
 
     db = PortraitDB()
-    db.generateImages()
+    db.generateImages(args.portraits)
 
     sys.exit(0)
