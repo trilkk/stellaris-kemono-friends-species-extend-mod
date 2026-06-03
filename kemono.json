@@ -14,7 +14,7 @@
         },
         {
             "name": "adelie_penguin",
-            "scale": 1.2,
+            "scale": 1.18,
             "flip": true
         },
         {
@@ -24,24 +24,24 @@
         },
         {
             "name": "arctic_fox",
-            "scale": 1.21
+            "scale": 1.17
         },
         {
             "name": "axolotl",
-            "scale": 1.17,
+            "scale": 1.13,
             "flip": true
         },
         {
             "name": "baikal_seal",
-            "scale": 1.23
+            "scale": 1.22
         },
         {
             "name": "binturong",
-            "scale": 1.13
+            "scale": 1.12
         },
         {
             "name": "black_headed_ibis",
-            "scale": 1.18,
+            "scale": 1.15,
             "flip": true
         },
         {
@@ -82,16 +82,16 @@
         },
         {
             "name": "crested_porcupine",
-            "scale": 1.19,
+            "scale": 1.18,
             "flip": true
         },
         {
             "name": "domestic_dog_mixed_breed",
-            "scale": 1.18
+            "scale": 1.19
         },
         {
             "name": "donkey",
-            "scale": 1.16,
+            "scale": 1.15,
             "flip": true
         },
         {
@@ -105,26 +105,26 @@
         },
         {
             "name": "eurasian_lynx",
-            "scale": 1.11
+            "scale": 1.12
         },
         {
             "name": "european_hare",
-            "scale": 1.18,
+            "scale": 1.17,
             "offset": -0.03
         },
         {
             "name": "ezo_red_fox",
-            "scale": 1.2,
+            "scale": 1.13,
             "flip": true
         },
         {
             "name": "fennec",
-            "scale": 1.17,
+            "scale": 1.1,
             "flip": true
         },
         {
             "name": "fossa",
-            "scale": 1.22,
+            "scale": 1.14,
             "flip": true
         },
         {
@@ -134,16 +134,16 @@
         },
         {
             "name": "gentoo_penguin",
-            "scale": 1.23,
+            "scale": 1.16,
             "flip": true
         },
         {
             "name": "gray_wolf",
-            "scale": 1.26
+            "scale": 1.17
         },
         {
             "name": "great_white_pelican",
-            "scale": 1.21,
+            "scale": 1.18,
             "flip": true
         },
         {
@@ -156,7 +156,7 @@
         },
         {
             "name": "humboldt_penguin",
-            "scale": 1.19,
+            "scale": 1.18,
             "flip": true
         },
         {
@@ -281,7 +281,7 @@
         },
         {
             "name": "okapi",
-            "scale": 1.16
+            "scale": 1.15
         },
         {
             "name": "okinawa_rail",
@@ -367,78 +367,80 @@
         },
         {
             "name": "scarlet_ibis",
-            "scale": 1.12,
+            "scale": 1.15,
+            "offset": -0.02,
             "flip": true
         },
         {
             "name": "scarlet_macaw",
-            "scale": 1.13
+            "scale": 1.16
         },
         {
             "name": "seiryu",
-            "scale": 1.12
+            "scale": 1.13
         },
         {
             "name": "serval",
-            "scale": 1.13,
+            "scale": 1.19,
             "offset": -0.02,
             "flip": true
         },
         {
             "name": "siberian_husky",
-            "scale": 1.12
+            "scale": 1.16
         },
         {
             "name": "silky_anteater",
-            "scale": 1.105
+            "scale": 1.16
         },
         {
             "name": "silver_fox",
-            "scale": 1.105
+            "scale": 1.15,
+            "offset": -0.02
         },
         {
             "name": "snow_leopard",
-            "scale": 1.105
+            "scale": 1.14
         },
         {
             "name": "snowshoe_hare",
-            "scale": 1.105
+            "scale": 1.13,
+            "offset": -0.02
         },
         {
             "name": "south_american_tapir",
-            "scale": 1.105
+            "scale": 1.07,
+            "flip": true
         },
         {
             "name": "south_china_tiger",
-            "scale": 1.105
-        },
-        {
-            "name": "southern_brown_kiwi",
-            "scale": 1.105
+            "offset": -0.01,
+            "scale": 1.16
         },
         {
             "name": "southern_rockhopper_penguin",
-            "scale": 1.105
+            "scale": 1.14
         },
         {
             "name": "southern_tamandua",
-            "scale": 1.105
+            "scale": 1.2
         },
         {
             "name": "spotted_hyena",
-            "scale": 1.105
+            "scale": 1.14
         },
         {
             "name": "stoat",
-            "scale": 1.105
+            "scale": 1.16
         },
         {
             "name": "superb_lyrebird",
-            "scale": 1.105
+            "scale": 1.12
         },
         {
             "name": "suri_alpaca",
-            "scale": 1.105
+            "scale": 1.13,
+            "flip": true
         },
         {
             "name": "thomsons_gazelle",

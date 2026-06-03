@@ -11,6 +11,7 @@ import sys
 # Species ##############################
 ########################################
 
+g_debug_background = (64, 0, 0, 64)
 g_kemono_database = 'kemono.json'
 
 ########################################
@@ -54,9 +55,9 @@ def images_equal(lhs, rhs):
         return True
     return False
 
-def image_create_empty_rgba(sx, sy):
+def image_create_empty_rgba(sx, sy, bg_color=(0, 0, 0, 0)):
     """Creates a new fully transparent image."""
-    return PIL.Image.new(mode='RGBA', size=(sx, sy), color=(0, 0, 0, 0))
+    return PIL.Image.new(mode='RGBA', size=(sx, sy), color=bg_color)
 
 def image_cut_transparency(img, cut_level):
     """Converts all fully transparent pixels in image to transparent black."""
@@ -115,7 +116,7 @@ class Portrait:
         self.__offset = offset
         self.__flip = flip
 
-    def generateImage(self, infile, outfile, trns_incoming, trns_outgoing, target_height):
+    def generateImage(self, infile, outfile, trns_incoming, trns_outgoing, target_height, debug_mode):
         """Generates image."""
         src_img = PIL.Image.open(infile)
         image_cut_transparency(src_img, trns_incoming)
@@ -125,21 +126,31 @@ class Portrait:
         ty = round(factor * float(src_img.size[1]))
         scaled_img = src_img.resize((tx, ty), PIL.Image.Resampling.LANCZOS)
         transposed_img = scaled_img.transpose(PIL.Image.Transpose.FLIP_LEFT_RIGHT) if self.__flip else scaled_img
-        dst_img = image_create_empty_rgba(tx, target_height)
         dy = round(self.__offset * float(target_height))
-        dst_img.paste(transposed_img, (0, dy))
+        # Calculate size of debug overlay if needed.
+        append_height = 0
+        if debug_mode:
+            append_height = max(dy + ty - target_height, 0)
+        dst_img = image_create_empty_rgba(tx, target_height + append_height)
+        dst_img.alpha_composite(transposed_img, (0, dy))
         image_cut_transparency(dst_img, trns_outgoing)
+        # Composite debug overlay of non-zero size.
+        if append_height > 0:
+            append_img = image_create_empty_rgba(tx, append_height, g_debug_background)
+            dst_img.alpha_composite(append_img, (0, target_height))
         dst_img = image_crop_content(dst_img, 2)
+        dx = dst_img.size[0]
+        dy = dst_img.size[1]
         try:
             cmp_image = PIL.Image.open(outfile)
             if images_equal(dst_img, cmp_image):
-                print("Image: '%s' (%ix%i) not changed" % (outfile, tx, target_height))
+                print("Image: '%s' (%ix%i) not changed" % (outfile, dx, dy))
             else:
                 dst_img.save(outfile)
-                print("Image: '%s' (%ix%i) updated" % (outfile, tx, target_height))
+                print("Image: '%s' (%ix%i) updated" % (outfile, dx, dy))
         except FileNotFoundError:
             dst_img.save(outfile)
-            print("Image: '%s' (%ix%i) created" % (outfile, tx, target_height))
+            print("Image: '%s' (%ix%i) created" % (outfile, dx, dy))
 
     def getName(self):
         """Accessor."""
@@ -156,15 +167,21 @@ class PortraitDB:
         """Constructor."""
         self.readFromJson(g_kemono_database)
 
-    def generateImages(self, portraits = []):
+    def generateImages(self, portraits = [], debug_mode = False):
         """Updates all images."""
         for ii in self.__portraits:
-            if portraits and (not (ii.getName() in portraits)):
+            if portraits and (ii.getName() not in portraits):
                 continue
             fileName = ii.getName() + ".png"
             dstFile = os.path.join(self.__dst_directory, ii.getName() + ".png")
             srcFile = os.path.join(self.__src_directory, fileName)
-            ii.generateImage(srcFile, dstFile, self.__trns_incoming, self.__trns_outgoing, self.__target_height)
+            ii.generateImage(
+                    srcFile,
+                    dstFile,
+                    self.__trns_incoming,
+                    self.__trns_outgoing,
+                    self.__target_height,
+                    debug_mode)
 
     def readFromJson(self, op):
         """Reads data from json."""
@@ -202,6 +219,7 @@ if __name__ == '__main__':
     program_name = os.path.basename(sys.argv[0])
 
     parser = argparse.ArgumentParser(usage="%s [options]" % (program_name), add_help=False, formatter_class=argparse.RawDescriptionHelpFormatter, description="""Script for regenerating mod images.""")
+    parser.add_argument('-d', '--debug', action='store_true', help='Produce debug images showing cut-off areas')
     parser.add_argument('-h', '--help', action='store_true', help='Print this help message and exit')
     parser.add_argument('--verify', action='store_true', help='Verify portraits and the database match')
     parser.add_argument('portraits', nargs='*', help='Specify the portraits to generate')
@@ -223,6 +241,6 @@ if __name__ == '__main__':
         os.chdir(script_path)
 
     db = PortraitDB()
-    db.generateImages(args.portraits)
+    db.generateImages(args.portraits, args.debug)
 
     sys.exit(0)
