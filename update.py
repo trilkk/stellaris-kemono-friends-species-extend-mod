@@ -1,0 +1,246 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+import os
+import PIL.Image
+import PIL.ImageChops
+import sys
+
+########################################
+# Species ##############################
+########################################
+
+g_debug_background = (64, 0, 0, 64)
+g_kemono_database = 'kemono.json'
+
+########################################
+# Functions ############################
+########################################
+
+def image_sizes_equal(lhs, rhs):
+    """Checks if image sizes are equal."""
+    return (lhs.width == rhs.width) and (lhs.height == rhs.height)
+
+def image_modes_equal(lhs, rhs):
+    """Checks if image modes are equal."""
+    return lhs.mode == rhs.mode
+
+def image_channels_equal(lhs, rhs, channel):
+    """Checks if given channels within images are equal."""
+    if (not image_sizes_equal(lhs, rhs)) or (not image_modes_equal(lhs, rhs)):
+        raise RuntimeError("image_channels_equal(): image sizes and modes must be equal")
+    lhs_data = lhs.get_flattened_data()
+    rhs_data = rhs.get_flattened_data()
+    for ii in range(len(lhs_data)):
+        lhs_pixel = lhs_data[ii]
+        rhs_pixel = rhs_data[ii]
+        if lhs_pixel[channel] != rhs_pixel[channel]:
+            return False
+    return True
+
+def images_equal(lhs, rhs):
+    """Checks if given images are equal."""
+    if (not image_sizes_equal(lhs, rhs)) or (not image_modes_equal(lhs, rhs)):
+        return False
+    if lhs.mode == "RGBA":
+        if not image_channels_equal(lhs, rhs, 3):
+            return False
+        diff = PIL.ImageChops.difference(lhs.convert("RGB"), rhs.convert("RGB"))
+    elif lhs.mode == "RGB":
+        diff = PIL.ImageChops.difference(lhs, rhs)
+    else:
+        raise RuntimeError("image_equals(): unsupported mode '%s'", (lhs.mode))
+    if not diff.getbbox():
+        return True
+    return False
+
+def image_create_empty_rgba(sx, sy, bg_color=(0, 0, 0, 0)):
+    """Creates a new fully transparent image."""
+    return PIL.Image.new(mode='RGBA', size=(sx, sy), color=bg_color)
+
+def image_cut_transparency(img, cut_level):
+    """Converts all fully transparent pixels in image to transparent black."""
+    if img.mode != "RGBA":
+        raise RuntimeError("invalid image mode: '%s'" % (img.mode))
+    ret = False
+    pixels = img.load()
+    for ii in range(img.width):
+        for jj in range(img.height):
+            pixel = img.getpixel((ii, jj))
+            # Simple case.
+            if pixel[3] <= cut_level:
+                pixels[ii, jj] = (0, 0, 0, 0)
+                ret = True
+    return ret
+
+def image_paste_center(dst, src):
+    """Pastes source image to the center of destination image."""
+    tx = round(float(dst.width - src.width) / 2.0)
+    ty = round(float(dst.height - src.height) / 2.0)
+    dst.paste(src, (tx, ty))
+
+def image_crop_content(img, border_lr = None, border_ud = None):
+    """Crop image to the actual content, add border if missing."""
+    if (border_lr is None) and (border_ud is None):
+        return img
+    bbox = img.getbbox()
+    if not bbox:
+        raise RuntimeError("image_crop_content(): no content")
+    if border_lr is None:
+        bbox = (0, bbox[1], img.width, bbox[3])
+    if border_ud is None:
+        bbox = (bbox[0], 0, bbox[2], img.height)
+    img = img.crop(bbox)
+    tgt_width = img.width
+    tgt_height = img.height
+    if not (border_lr is None):
+        tgt_width += 2 * border_lr
+    if not (border_ud is None):
+        tgt_height += 2 * border_ud
+    cropped_image = image_create_empty_rgba(tgt_width, tgt_height)
+    image_paste_center(cropped_image, img)
+    return cropped_image
+
+########################################
+# Species ##############################
+########################################
+
+class Portrait:
+    """Class abstracting a species portrait."""
+
+    def __init__(self, name, scale = None, offset = None, flip = False):
+        """Constructor."""
+        self.__name = name
+        self.__scale = scale
+        self.__offset = offset
+        self.__flip = flip
+
+    def generateImage(self, infile, outfile, trns_incoming, trns_outgoing, target_height, debug_mode):
+        """Generates image."""
+        src_img = PIL.Image.open(infile)
+        image_cut_transparency(src_img, trns_incoming)
+        src_img = image_crop_content(src_img, 4, 4)
+        factor = float(target_height) * self.__scale / float(src_img.size[1])
+        tx = round(factor * float(src_img.size[0]))
+        ty = round(factor * float(src_img.size[1]))
+        scaled_img = src_img.resize((tx, ty), PIL.Image.Resampling.LANCZOS)
+        transposed_img = scaled_img.transpose(PIL.Image.Transpose.FLIP_LEFT_RIGHT) if self.__flip else scaled_img
+        dy = round(self.__offset * float(target_height))
+        # Calculate size of debug overlay if needed.
+        append_height = 0
+        if debug_mode:
+            append_height = max(dy + ty - target_height, 0)
+        dst_img = image_create_empty_rgba(tx, target_height + append_height)
+        dst_img.alpha_composite(transposed_img, (0, dy))
+        image_cut_transparency(dst_img, trns_outgoing)
+        # Composite debug overlay of non-zero size.
+        if append_height > 0:
+            append_img = image_create_empty_rgba(tx, append_height, g_debug_background)
+            dst_img.alpha_composite(append_img, (0, target_height))
+        dst_img = image_crop_content(dst_img, 2)
+        dx = dst_img.size[0]
+        dy = dst_img.size[1]
+        try:
+            cmp_image = PIL.Image.open(outfile)
+            if images_equal(dst_img, cmp_image):
+                print("Image: '%s' (%ix%i) not changed" % (outfile, dx, dy))
+            else:
+                dst_img.save(outfile)
+                print("Image: '%s' (%ix%i) updated" % (outfile, dx, dy))
+        except FileNotFoundError:
+            dst_img.save(outfile)
+            print("Image: '%s' (%ix%i) created" % (outfile, dx, dy))
+
+    def getName(self):
+        """Accessor."""
+        return self.__name
+
+########################################
+# SpeciesDB ############################
+########################################
+
+class PortraitDB:
+    """Portrait database."""
+
+    def __init__(self):
+        """Constructor."""
+        self.readFromJson(g_kemono_database)
+
+    def generateImages(self, portraits = [], debug_mode = False):
+        """Updates all images."""
+        for ii in self.__portraits:
+            if portraits and (ii.getName() not in portraits):
+                continue
+            fileName = ii.getName() + ".png"
+            dstFile = os.path.join(self.__dst_directory, ii.getName() + ".png")
+            srcFile = os.path.join(self.__src_directory, fileName)
+            ii.generateImage(
+                    srcFile,
+                    dstFile,
+                    self.__trns_incoming,
+                    self.__trns_outgoing,
+                    self.__target_height,
+                    debug_mode)
+
+    def readFromJson(self, op):
+        """Reads data from json."""
+        if not os.path.isfile(op):
+            raise RuntimeError("database not found: '%s'" % (op))
+        fd = open(op, 'r')
+        data = json.load(fd)
+        fd.close()
+        self.__dst_directory = data['dst_directory']
+        self.__src_directory = data['src_directory']
+        self.__trns_incoming = int(data['translucency_threshold_incoming'])
+        self.__trns_outgoing = int(data['translucency_threshold_outgoing'])
+        self.__target_height = int(data['target_height'])
+        self.__portraits = []
+        default_offset = float(data['default_offset'])
+        for ii in data['portraits']:
+            name = ii['name']
+            for jj in self.__portraits:
+                if jj.getName() == name:
+                    raise RuntimeError("readFromJson(): multiple instances of portrait '%s'" % (name))
+            scale = float(ii['scale'])
+            offset = default_offset + float(ii['offset']) if 'offset' in ii.keys() else default_offset
+            flip = bool(ii['flip']) if 'flip' in ii.keys() else False
+            self.__portraits += [Portrait(name, scale, offset, flip)]
+
+    def verify(self):
+        """Verifies data against existing files."""
+
+########################################
+# __main__ #############################
+########################################
+
+if __name__ == '__main__':
+
+    program_name = os.path.basename(sys.argv[0])
+
+    parser = argparse.ArgumentParser(usage="%s [options]" % (program_name), add_help=False, formatter_class=argparse.RawDescriptionHelpFormatter, description="""Script for regenerating mod images.""")
+    parser.add_argument('-d', '--debug', action='store_true', help='Produce debug images showing cut-off areas')
+    parser.add_argument('-h', '--help', action='store_true', help='Print this help message and exit')
+    parser.add_argument('--verify', action='store_true', help='Verify portraits and the database match')
+    parser.add_argument('portraits', nargs='*', help='Specify the portraits to generate')
+
+    args = parser.parse_args()
+
+    if args.help:
+        parser.print_help(sys.stdout)
+        sys.exit(0)
+
+    if args.verify:
+        raise RuntimeError('not implemented yet')
+
+    # Execution is relevant to script path.
+    script_path = os.path.abspath(os.path.dirname(__file__))
+    current_path = os.path.abspath(os.getcwd())
+    if script_path != current_path:
+        print("Executing from script directory: '%s'" % (os.path.relpath(script_path, current_path)))
+        os.chdir(script_path)
+
+    db = PortraitDB()
+    db.generateImages(args.portraits, args.debug)
+
+    sys.exit(0)
